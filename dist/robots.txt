@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /payment/
+Disallow: /profile/
+Disallow: /my-orders/
+
+Allow: /
+Allow: /products/
+
+Sitemap: https://ambicaalum.vercel.app/sitemap.xml
