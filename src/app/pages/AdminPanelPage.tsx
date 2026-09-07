@@ -19,7 +19,7 @@ import {
 import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_URL || "";
 
 interface Product {
   _id: string;
