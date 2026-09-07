@@ -15,12 +15,12 @@ router.get("/slug/:slug", getProductBySlug);
 router
   .route("/")
   .get(getProducts)
-  .post(createProduct);
+  .post(protect, adminOnly, createProduct);
 
 router
   .route("/:id")
   .get(getProductById)
-  .put(updateProduct)
-  .delete(deleteProduct);
+  .put(protect, adminOnly, updateProduct)
+  .delete(protect, adminOnly, deleteProduct);
 
 module.exports = router;
