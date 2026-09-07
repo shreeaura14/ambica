@@ -27,7 +27,7 @@ interface Filters {
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from "../config/api";
 
 const DEFAULT_FILTERS: Filters = {
   productType: "",
@@ -78,8 +78,14 @@ export function ProductListingPage() {
     try {
       const qs = buildQueryString(activeSearch, filters);
       const res = await fetch(`${API_BASE}/api/products${qs ? `?${qs}` : ""}`);
-      if (!res.ok) throw new Error("Failed to load products");
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        throw new Error(
+          "Product API returned HTML instead of JSON. Check VITE_API_URL and make sure the Express backend is deployed and reachable."
+        );
+      }
       const json = await res.json();
+      if (!res.ok) throw new Error(json.message || "Failed to load products");
       setProducts(json.data ?? []);
     } catch (err: any) {
       setError(err.message || "Something went wrong. Please try again.");

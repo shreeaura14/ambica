@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 import { CreditCard, ShieldCheck, Loader2, AlertCircle } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { API_BASE } from "../config/api";
 
 export function PaymentPage() {
   const location = useLocation();

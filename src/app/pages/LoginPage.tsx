@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { Mail, Lock, Eye, EyeOff, User, Building2, Loader2 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
+import { API_BASE } from "../config/api";
 
 export function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +26,7 @@ export function LoginPage() {
 
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/users/login", {
+      const res = await fetch(`${API_BASE}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

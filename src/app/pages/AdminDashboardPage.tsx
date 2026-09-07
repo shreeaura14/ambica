@@ -6,7 +6,7 @@ import {
   Loader2, RefreshCw, FileText,
 } from "lucide-react";
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from "../config/api";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Stats {

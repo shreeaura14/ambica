@@ -3,7 +3,7 @@ import { FileText, Send, CheckCircle, Loader2 } from "lucide-react";
 import { Link } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from "../config/api";
 
 interface QuoteForm {
   product: string;

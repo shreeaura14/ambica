@@ -2,6 +2,7 @@ import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, AlertCircle, Loader2 } 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import emailjs from "@emailjs/browser";
+import { API_BASE } from "../config/api";
 
 export function ContactPage() {
   const [searchParams] = useSearchParams();
@@ -89,7 +90,7 @@ export function ContactPage() {
     try {
       // STEP 1: Save Inquiry to Backend Database (MongoDB) so Admin Dashboard tracks it
       try {
-        await fetch("http://localhost:5000/api/quotes", {
+        await fetch(`${API_BASE}/api/quotes`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

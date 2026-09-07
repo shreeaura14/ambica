@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router";
 import { Package, Clock, CheckCircle, Truck, XCircle, Search, Loader2, RefreshCw } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from "../config/api";
 
 interface OrderItem { name: string; quantity: number; price: number; purity: string; }
 interface Order {

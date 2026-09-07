@@ -4,7 +4,7 @@ import { CreditCard, MapPin, Truck, Loader2 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 import { useAuth } from "../contexts/AuthContext";
 
-const API_BASE = "http://localhost:5000";
+import { API_BASE } from "../config/api";
 
 interface ShippingForm {
   email: string;

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
 import { Mail, ArrowLeft, CheckCircle } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { API_BASE } from "../config/api";
 
 // Ammonia Alum Real Photos
 import ammoniaCrystalImg from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
@@ -103,7 +104,7 @@ export function ProductSubcategoriesPage() {
   const [dbProducts, setDbProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products?limit=100")
+    fetch(`${API_BASE}/api/products?limit=100`)
       .then(res => res.json())
       .then(json => {
         if (json.success && json.data) {
