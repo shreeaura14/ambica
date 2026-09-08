@@ -26,6 +26,7 @@ export function Footer() {
               <Link to="/" className="block text-gray-300 hover:text-[#00B4D8] transition-colors">Home</Link>
               <Link to="/about" className="block text-gray-300 hover:text-[#00B4D8] transition-colors">About Us</Link>
               <Link to="/products" className="block text-gray-300 hover:text-[#00B4D8] transition-colors">Products</Link>
+              <Link to="/contact" className="block text-gray-300 hover:text-[#00B4D8] transition-colors">Contact</Link>
             </div>
           </div>
 
