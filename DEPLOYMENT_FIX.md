@@ -1,36 +1,34 @@
-# Ambica API deployment fix
+# Ambica deployment fix
 
-## Why the old build failed
-The frontend was calling `/api/products` on the frontend host. On Vercel the catch-all rewrite sent that request to `index.html`, so `response.json()` received `<!DOCTYPE html>` and threw:
+The frontend and Express API can now be deployed in the same Vercel project.
 
-`Unexpected token '<', "<!DOCTYPE "... is not valid JSON`
+## What was fixed
+- Added `api/index.js` as the Vercel serverless entry point.
+- Changed `backend/server.js` to export the Express app and only call `listen()` during local development.
+- Added the backend runtime dependencies to the root `package.json` so Vercel installs them.
+- Added a Vercel rewrite so `/api/*` reaches Express instead of the SPA `index.html`.
+- Frontend API calls continue to use `API_BASE`; when `VITE_API_URL` is empty, they correctly use same-origin `/api`.
+- Removed the real `backend/.env` from the deployable project.
 
-The frontend now uses `VITE_API_URL` for every backend request. Local development can leave it empty and use the Vite proxy.
+## Vercel environment variables
+Set these in the Vercel project:
 
-## Production
-Set this frontend environment variable before building:
+- `MONGO_URI` = your MongoDB Atlas connection string
+- `JWT_SECRET` = a strong random secret
+- `NODE_ENV` = `production`
+- `FRONTEND_URL` = `https://ambicaalumind.com` (and add the `www` domain too if you use it)
+- Email variables if email features are used
+- Cloudinary variables if image uploads are used
 
-`VITE_API_URL=https://YOUR-BACKEND-DOMAIN`
+Do **not** put `MONGO_URI`, `JWT_SECRET`, email passwords, or Cloudinary secrets in Git or frontend `VITE_*` variables.
 
-The backend must be deployed separately as an Express/Node service and must expose:
+## Test after deployment
+Open:
 
-`GET /api/products`
+`https://ambicaalumind.com/api`
 
-For example, if the backend is deployed at `https://api.example.com`, set:
+Then test:
 
-`VITE_API_URL=https://api.example.com`
+`https://ambicaalumind.com/api/products`
 
-Then rebuild the frontend and redeploy `dist`.
-
-## Backend environment
-Set these on the backend host (do not commit real secrets):
-
-- `PORT` — supplied by the hosting platform when applicable
-- `MONGO_URI` — MongoDB Atlas connection string
-- `JWT_SECRET` — strong random secret
-- `NODE_ENV=production`
-- `FRONTEND_URL=https://YOUR-FRONTEND-DOMAIN`
-- Email/Cloudinary variables if those features are used
-
-## Important
-Do not set `VITE_API_URL` to the frontend URL unless the Express API is actually hosted on that same origin.
+The second URL must return JSON such as `{ "success": true, "data": [...] }`.
