@@ -64,10 +64,44 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 // ─── Database ────────────────────────────────────────────────────────────────
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Error:", err));
+// Keep a connection promise cached so Vercel warm invocations reuse the same
+// MongoDB connection instead of opening a new connection for every request.
+let mongoConnectPromise = null;
+
+const connectDB = async () => {
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI is not configured");
+  }
+
+  if (mongoose.connection.readyState === 1) return;
+
+  if (!mongoConnectPromise) {
+    mongoConnectPromise = mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 10000,
+    }).catch((err) => {
+      mongoConnectPromise = null;
+      console.error("❌ MongoDB Error:", err.message);
+      throw err;
+    });
+  }
+
+  await mongoConnectPromise;
+};
+
+// Every API request waits for MongoDB before reaching a controller. This is
+// important on Vercel because a fresh serverless invocation may not have an
+// established database connection yet.
+app.use("/api", async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error("Database connection failed:", err.message);
+    res.status(503).json({
+      message: "Database unavailable. Check the MONGO_URI and MongoDB Atlas network access settings.",
+    });
+  }
+});
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
 app.use("/api/users",    require("./routes/UserRoutes"));
@@ -105,8 +139,14 @@ app.use((err, req, res, next) => {
 });
 
 // ─── Start ───────────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`🌐 Mode: ${process.env.NODE_ENV || "development"}`);
-});
+// Start the HTTP server only when running locally.
+// Vercel imports this Express app as a serverless function.
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`🌐 Mode: ${process.env.NODE_ENV || "development"}`);
+  });
+}
+
+module.exports = app;
