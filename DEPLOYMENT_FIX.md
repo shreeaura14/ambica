@@ -32,3 +32,16 @@ Then test:
 `https://ambicaalumind.com/api/products`
 
 The second URL must return JSON such as `{ "success": true, "data": [...] }`.
+
+
+## Important Vercel ES Module fix
+
+The root `package.json` uses `"type": "module"`, while the Express backend
+uses CommonJS. Vercel loads `api/index.js` from the root module scope, so a
+plain `module.exports = require(...)` there causes:
+
+`ReferenceError: module is not defined in ES module scope`
+
+`api/index.js` now uses Node's `createRequire()` and exports the Express app
+with `export default`. The backend remains CommonJS because
+`backend/package.json` contains `"type": "commonjs"`.
