@@ -6,4 +6,4 @@ const require = createRequire(import.meta.url);
 // require(...) dependencies continue to run as CommonJS.
 const app = require("../backend/server.js");
 
-export default app;
+module.exports = app;
