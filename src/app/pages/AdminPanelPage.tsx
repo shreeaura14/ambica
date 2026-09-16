@@ -72,8 +72,8 @@ export function AdminPanelPage() {
     setError("");
     try {
       const res = await fetch(`${API_BASE}/api/products`);
-      if (!res.ok) throw new Error("Failed to load products");
-      const json = await res.json();
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.message || `Failed to load products (HTTP ${res.status})`);
       setProducts(json.data || []);
     } catch (err: any) {
       setError(err.message || "Failed to load products");
