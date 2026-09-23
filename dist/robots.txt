@@ -1,11 +1,11 @@
 User-agent: *
-Disallow: /admin/
-Disallow: /checkout/
-Disallow: /payment/
-Disallow: /profile/
-Disallow: /my-orders/
-
 Allow: /
-Allow: /products/
 
-Sitemap: https://ambicaalum.vercel.app/sitemap.xml
+# Keep private/account/admin areas out of search results.
+Disallow: /admin
+Disallow: /profile
+Disallow: /checkout
+Disallow: /payment
+Disallow: /my-orders
+
+Sitemap: https://www.ambicaalumind.com/sitemap.xml
