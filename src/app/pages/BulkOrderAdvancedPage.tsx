@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Upload, TrendingDown, Truck, Shield, CheckCircle, Phone, Mail } from "lucide-react";
 import { Link } from "react-router";
 
+import { SEO } from "../components/seo/SEO";
+
 export function BulkOrderAdvancedPage() {
   const [formData, setFormData] = useState({
     productName: "",
@@ -57,6 +59,11 @@ export function BulkOrderAdvancedPage() {
 
   return (
     <div className="min-h-screen bg-[#F4F6F8] py-12">
+      <SEO
+        title="Bulk Alum Supply & Request Quote | Ambica Industries"
+        description="Request a bulk quote for Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate from Ambica Industries."
+        path="/bulk-order-advanced"
+      />
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">

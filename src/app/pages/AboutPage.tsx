@@ -1,12 +1,9 @@
 import { Award, Target, Eye, Heart, Factory, Shield, Users, TrendingUp } from "lucide-react";
-import { useEffect } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import manufacturingImage from "@/Assets/Ammonia Alum/Ammonia Alum Small Crystal.png";
+import { SEO } from "../components/seo/SEO";
 import labImage from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
 export function AboutPage() {
-  useEffect(() => {
-    document.title = "Ambica Industries | About";
-  }, []);
 
   const values = [
     { icon: Shield, title: "Quality First", description: "Uncompromising standards in every product batch" },
@@ -17,6 +14,11 @@ export function AboutPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="About Ambica Industries | Alum Manufacturer in Ahmedabad"
+        description="Learn about Ambica Industries, an Ahmedabad-based manufacturer and supplier of alum and aluminium sulphate products for water treatment and industrial applications."
+        path="/about"
+      />
       {/* Header Banner */}
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-8 md:py-10">
         <div className="max-w-[1200px] mx-auto px-6">

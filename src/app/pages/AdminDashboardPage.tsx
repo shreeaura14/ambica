@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 
 import { API_BASE } from "../config/api";
+import { SEO } from "../components/seo/SEO";
+
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Stats {
@@ -51,6 +53,7 @@ const STATUS_ICONS: Record<string, JSX.Element> = {
 const ORDER_STATUSES = ["placed", "confirmed", "processing", "dispatched", "delivered", "cancelled"];
 
 // ─── Component ───────────────────────────────────────────────────────────────
+
 export function AdminDashboardPage() {
   const { user, token } = useAuth();
 
@@ -128,6 +131,12 @@ export function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Ambica Industries Admin Dashboard"
+        description="Private administration dashboard."
+        path="/admin/dashboard"
+        noindex
+      />
       {/* Header */}
       <section className="bg-gradient-to-r from-[#1E3A5F] to-[#1FB6A6] text-white py-12">
         <div className="max-w-[1200px] mx-auto px-6">

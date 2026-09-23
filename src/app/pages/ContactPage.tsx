@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import emailjs from "@emailjs/browser";
 import { API_BASE } from "../config/api";
+import { SEO } from "../components/seo/SEO";
 
 export function ContactPage() {
   const [searchParams] = useSearchParams();
-  useEffect(() => {
-    document.title = "Ambica Industries | Contact";
-  }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -220,6 +218,11 @@ export function ContactPage() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Contact Ambica Industries | Alum Supplier in Ahmedabad"
+        description="Contact Ambica Industries in Ahmedabad for Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate enquiries, bulk orders and technical support."
+        path="/contact"
+      />
       {/* Header */}
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-8 md:py-10">
         <div className="max-w-[1200px] mx-auto px-6">

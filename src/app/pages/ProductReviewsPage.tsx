@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Star, ThumbsUp, User } from "lucide-react";
 import Image4 from "@/Assets/Images/Amonia-alum-powder-500x500.jpg";
 
+import { SEO } from "../components/seo/SEO";
+
 export function ProductReviewsPage() {
   const [newReview, setNewReview] = useState({
     rating: 0,
@@ -131,6 +133,11 @@ export function ProductReviewsPage() {
 
   return (
     <div className="min-h-screen bg-[#F4F6F8] py-12">
+      <SEO
+        title="Ambica Industries Product Reviews | Alum Products"
+        description="Read customer feedback and product information for alum and aluminium sulphate products from Ambica Industries."
+        path="/product-reviews"
+      />
       <div className="max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="mb-8">

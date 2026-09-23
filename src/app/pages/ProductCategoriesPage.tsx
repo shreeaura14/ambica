@@ -1,16 +1,13 @@
 import { Link } from "react-router";
-import { useEffect } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { ArrowRight } from "lucide-react";
+import { SEO } from "../components/seo/SEO";
 import ammoniaCrystalImg from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
 import nonFerricSlabImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Slab.png";
 import ferricGrade4Img from "@/Assets/Ferric Alum/Ferric Alum Grade4.png";
 import liquidAlumImg from "@/Assets/Liquid Alum/Liquid Alum.png";
 
 export function ProductCategoriesPage() {
-  useEffect(() => {
-    document.title = "Ambica Industries | Products";
-  }, []);
 
   const categories = [
     {
@@ -49,6 +46,11 @@ export function ProductCategoriesPage() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Alum Products | Ammonia Alum, Non-Ferric Alum & Aluminium Sulphate | Ambica Industries"
+        description="Explore Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate products from Ambica Industries for water treatment and industrial applications."
+        path="/products"
+      />
       {/* Header */}
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-8 md:py-10">
         <div className="max-w-[1200px] mx-auto px-6">

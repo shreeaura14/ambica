@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Package, TrendingDown, Truck } from "lucide-react";
 
+import { SEO } from "../components/seo/SEO";
+
 export function BulkOrderPage() {
   const [quantity, setQuantity] = useState(1000);
   const [product, setProduct] = useState("ammonia");
@@ -12,6 +14,11 @@ export function BulkOrderPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Bulk Orders | Alum Manufacturer & Supplier | Ambica Industries"
+        description="Request bulk alum and aluminium sulphate supply from Ambica Industries for industrial, water treatment and commercial requirements."
+        path="/bulk-order"
+      />
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-16">
         <div className="max-w-[1200px] mx-auto px-6">
           <h1 className="mb-4 text-white">Bulk Order</h1>

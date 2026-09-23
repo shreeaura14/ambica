@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router";
 import { Mail, ArrowLeft, CheckCircle } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { API_BASE } from "../config/api";
+import { SEO } from "../components/seo/SEO";
 
 // Ammonia Alum Real Photos
 import ammoniaCrystalImg from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
@@ -100,6 +101,12 @@ export function ProductSubcategoriesPage() {
   const { categoryName } = useParams<{ categoryName: string }>();
   const categoryKey = categoryName?.toLowerCase() || "";
   const group = SUBCATEGORIES_DATA[categoryKey];
+  const seoTitle = group
+    ? `${group.title} | Ambica Industries | Manufacturer & Supplier in Ahmedabad`
+    : "Alum Products | Ambica Industries";
+  const seoDescription = group
+    ? `${group.title} from Ambica Industries. Explore product grades, forms, applications and bulk supply options for industrial and water treatment requirements.`
+    : "Explore alum and aluminium sulphate products from Ambica Industries.";
 
   const [dbProducts, setDbProducts] = useState<any[]>([]);
 
@@ -200,6 +207,12 @@ export function ProductSubcategoriesPage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        path={`/products/category/${categoryKey}`}
+        noindex={!group}
+      />
       {/* Breadcrumb */}
       <div className="bg-[#F1F5F9] py-4 border-b border-gray-200">
         <div className="max-w-[1200px] mx-auto px-6">

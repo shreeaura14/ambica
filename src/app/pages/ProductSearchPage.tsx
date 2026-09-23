@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { ProductCard } from "../components/ProductCard";
 
+import { SEO } from "../components/seo/SEO";
+
 export function ProductSearchPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
@@ -23,6 +25,12 @@ export function ProductSearchPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Search Alum Products | Ambica Industries"
+        description="Search alum and aluminium sulphate products from Ambica Industries."
+        path="/products/search"
+        noindex
+      />
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-16">
         <div className="max-w-[1200px] mx-auto px-6">
           <h1 className="mb-6 text-white">Search Products</h1>

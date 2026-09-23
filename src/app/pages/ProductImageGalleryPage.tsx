@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { X } from "lucide-react";
 
+import { SEO } from "../components/seo/SEO";
+
 export function ProductImageGalleryPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -23,6 +25,12 @@ export function ProductImageGalleryPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Alum Product Gallery | Ambica Industries"
+        description="View alum product images from Ambica Industries."
+        path="/products/gallery"
+        noindex
+      />
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-16">
         <div className="max-w-[1200px] mx-auto px-6">
           <h1 className="mb-4 text-white">Product Gallery</h1>

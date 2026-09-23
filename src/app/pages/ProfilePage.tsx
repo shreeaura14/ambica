@@ -7,6 +7,8 @@ import {
 import { useAuth } from "../contexts/AuthContext";
 
 import { API_BASE } from "../config/api";
+import { SEO } from "../components/seo/SEO";
+
 
 interface UserProfile {
   _id: string;
@@ -20,6 +22,7 @@ interface UserProfile {
   totalSpent: number;
   createdAt: string;
 }
+
 
 export function ProfilePage() {
   const { user, token, setAuth, logout } = useAuth();
@@ -102,6 +105,12 @@ export function ProfilePage() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#F4F6F8]">
+      <SEO
+        title="Ambica Industries Profile"
+        description="Account profile page for Ambica Industries."
+        path="/profile"
+        noindex
+      />
         <Loader2 className="w-10 h-10 animate-spin text-[#1E3A5F]" />
       </div>
     );

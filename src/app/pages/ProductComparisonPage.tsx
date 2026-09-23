@@ -1,6 +1,8 @@
 import { Check, X } from "lucide-react";
 import { Link } from "react-router";
 
+import { SEO } from "../components/seo/SEO";
+
 export function ProductComparisonPage() {
   const products = [
     {
@@ -34,6 +36,12 @@ export function ProductComparisonPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="Ambica Industries Product Comparison"
+        description="Compare alum product options from Ambica Industries."
+        path="/products/compare"
+        noindex
+      />
       <section className="bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] text-white py-16">
         <div className="max-w-[1200px] mx-auto px-6">
           <h1 className="mb-4 text-white">Product Comparison</h1>

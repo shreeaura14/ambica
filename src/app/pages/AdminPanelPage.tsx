@@ -20,6 +20,8 @@ import { useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 
 import { API_BASE } from "../config/api";
+import { SEO } from "../components/seo/SEO";
+
 
 interface Product {
   _id: string;
@@ -36,6 +38,7 @@ interface Product {
   images?: string[];
   form?: string;
 }
+
 
 export function AdminPanelPage() {
   const { token } = useAuth();
@@ -174,6 +177,12 @@ export function AdminPanelPage() {
 
   return (
     <div className="min-h-screen bg-[#F4F6F8]">
+      <SEO
+        title="Ambica Industries Admin"
+        description="Private administration page."
+        path="/admin"
+        noindex
+      />
       <div className="flex">
         {/* Sidebar */}
         <aside className="w-64 bg-[#1B2A41] text-white min-h-screen">

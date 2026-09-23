@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { useEffect } from "react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { SEO, SITE_URL } from "../components/seo/SEO";
 import heroImage from "@/Assets/Ammonia Alum/Ammonia Alum Lumps.png";
 import ammoniaCrystalImg from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
 import nonFerricLumpsImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Lumps.png";
@@ -23,9 +23,32 @@ import {
 } from "lucide-react";
 
 export function HomePage() {
-  useEffect(() => {
-    document.title = "Ambica Industries | Home";
-  }, []);
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ambica Industries",
+      "url": SITE_URL,
+      "logo": `${SITE_URL}/favicon.svg`,
+      "description": "Manufacturer and supplier of Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate for water treatment and industrial applications.",
+      "telephone": "+91-70165-53191",
+      "email": "ambicaalumindustries@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "275, Nr. Cow Statue Char Rasta, Sardar Patel Ring Road, Sarkhej-Okaf Kamod",
+        "addressLocality": "Ahmedabad",
+        "addressRegion": "Gujarat",
+        "postalCode": "382427",
+        "addressCountry": "IN"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Ambica Industries",
+      "url": SITE_URL
+    }
+  ];
 
   const productCategories = [
     { name: "Ammonia Alum", description: "Crystals, Lumps & Powders", icon: Beaker, link: "/products/category/ammonia-alum" },
@@ -49,12 +72,18 @@ export function HomePage() {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Ambica Industries | Alum Manufacturer & Supplier in Ahmedabad"
+        description="Ambica Industries manufactures and supplies Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate for water treatment and industrial applications in Ahmedabad, Gujarat, India."
+        path="/"
+        structuredData={structuredData}
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-[#1E3A5F] to-[#1FB6A6] text-white">
         <div className="max-w-[1200px] mx-auto px-6 py-10 md:py-14">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">Trusted Alum Manufacturers Since 1998</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">Ambica Industries – Trusted Alum Manufacturer & Supplier Since 1998</h1>
               <p className="text-base mb-6 text-gray-100 leading-relaxed">
                 Leading supplier of high-quality alum and aluminium sulphate for water purification,
                 industrial applications, agriculture, and more. Committed to excellence in every delivery.
@@ -77,7 +106,7 @@ export function HomePage() {
             <div className="rounded-2xl overflow-hidden shadow-xl aspect-[16/10] max-h-[320px] bg-slate-100">
               <ImageWithFallback
                 src={heroImage}
-                alt="Alum Crystals"
+                alt="Ammonia Alum crystals manufactured and supplied by Ambica Industries"
                 className="w-full h-full object-cover object-center"
               />
             </div>
