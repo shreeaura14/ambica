@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { useParams, Link } from "react-router";
-import { Mail, ArrowLeft, CheckCircle } from "lucide-react";
+import { Mail, ArrowLeft, CheckCircle, X, Send, Loader2, CheckCircle2 } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { API_BASE } from "../config/api";
 import { SEO } from "../components/seo/SEO";
@@ -36,7 +37,7 @@ interface SubcategoryItem {
   name: string;
   description: string;
   features: string[];
-  price: string;
+  // price: string;
   image: string;
 }
 
@@ -52,17 +53,30 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     title: "Ammonia Alum",
     description: "High-purity Ammonia Alum forms including crystals, small & big crystals, lumps, delux, super white, raw powder, powder, and pure powder.",
     image: ammoniaCrystalImg,
+    // items: [
+    //   { name: "Ammonia Alum Crystal", description: "Solid crystal form, 98% purity, 11% Al2O3 content for drinking water treatment.", features: ["> 99% Purity", "Grade:Tech/Pure/AR", "Packaging:25/50 kg HDPE/PP Bags", "Made in India", "Chemical Formula:AlNH4(SO4)2.12H2O", "CAS:7784-26-1", "Practical Size:Crystal/Lumps/Powder", "Use:Watertreatment/Paper/Phrama/Textile/Food/Cosmetic"], price: "₹40/Kg", image: ammoniaCrystalImg },
+    //   { name: "Ammonia Alum Lumps", description: "Coarse crystalline lumps, 99% purity for industrial water treatment.", features: ["99% Purity", "Industrial Grade", "25-50 kg HDPE Bag", "Made in India"], price: "₹44/Kg", image: ammoniaLumpsImg },
+    //   { name: "Ammonia Alum Small Crystal", description: "Fine white small crystals for easy dispersion and consistent dosing.", features: ["99% Purity", "Technical Grade", "AlNH4(SO4)2·12H2O", "White Color"], price: "₹49/Kg", image: ammoniaSmallCrystalImg },
+    //   { name: "Ammonia Alum Big Crystal", description: "Oversized transparent solid crystal with 99.9% purity.", features: ["99.9% Purity", "Technical Grade", "CAS: 7784-26-1", "Solid Crystal"], price: "₹47/Kg", image: ammoniaBigCrystalImg },
+    //   { name: "Ammonia Alum Delux", description: "Premium delux crystal grade for specialized water purification.", features: ["99.9% Purity", "Delux Grade", "Minimal Impurities", "High Transparency"], price: "₹47/Kg", image: ammoniaDeluxImg },
+    //   { name: "Ammonia Alum Super", description: "Engineered super industrial grade with optimal pH stabilization.", features: ["98.9% Purity", "Super Grade", "11% Al2O3", "Purifying & Dyeing"], price: "₹44/Kg", image: ammoniaSuperImg },
+    //   { name: "Ammonia Alum White", description: "100% water-soluble brilliant white lump ammonia alum.", features: ["98.9% Purity", "100% Water Soluble", "Pure White Color", "Purifying & Dyeing"], price: "₹44/Kg", image: ammoniaWhiteImg },
+    //   { name: "Ammonia Alum Raw Powder", description: "Crushed white raw powder for heavy industrial water treatment.", features: ["90% Purity", "Powder Form", "CAS: 7784-25-0", "Packet Packaging"], price: "₹27/Kg", image: ammoniaRawPowderImg },
+    //   { name: "Ammonia Alum Powder", description: "Bio-Tech grade 99.90% pure white powder for water treatment.", features: ["99.90% Purity", "Bio-Tech Grade", "(NH4)Al(SO4)2", "Molecular Wt: 237.15"], price: "₹32/Kg", image: ammoniaPowderImg },
+    //   { name: "Ammonia Alum Pure Powder", description: "Fine pure powder for pharmaceutical, food, and cosmetic applications.", features: ["99.5% Purity", "Pure Grade", "Cosmetics & Dyeing", "Fast Dissolving"], price: "₹35/Kg", image: ammoniaPurePowderImg }
+    // ] 
+
     items: [
-      { name: "Ammonia Alum Crystal", description: "Solid crystal form, 98% purity, 11% Al2O3 content for drinking water treatment.", features: ["98% Purity", "11% Al2O3", "Reagent Grade", "Drum/Barrel Packaging"], price: "₹40/Kg", image: ammoniaCrystalImg },
-      { name: "Ammonia Alum Lumps", description: "Coarse crystalline lumps, 99% purity for industrial water treatment.", features: ["99% Purity", "Industrial Grade", "25-50 kg HDPE Bag", "Made in India"], price: "₹44/Kg", image: ammoniaLumpsImg },
-      { name: "Ammonia Alum Small Crystal", description: "Fine white small crystals for easy dispersion and consistent dosing.", features: ["99% Purity", "Technical Grade", "AlNH4(SO4)2·12H2O", "White Color"], price: "₹49/Kg", image: ammoniaSmallCrystalImg },
-      { name: "Ammonia Alum Big Crystal", description: "Oversized transparent solid crystal with 99.9% purity.", features: ["99.9% Purity", "Technical Grade", "CAS: 7784-26-1", "Solid Crystal"], price: "₹47/Kg", image: ammoniaBigCrystalImg },
-      { name: "Ammonia Alum Delux", description: "Premium delux crystal grade for specialized water purification.", features: ["99.9% Purity", "Delux Grade", "Minimal Impurities", "High Transparency"], price: "₹47/Kg", image: ammoniaDeluxImg },
-      { name: "Ammonia Alum Super", description: "Engineered super industrial grade with optimal pH stabilization.", features: ["98.9% Purity", "Super Grade", "11% Al2O3", "Purifying & Dyeing"], price: "₹44/Kg", image: ammoniaSuperImg },
-      { name: "Ammonia Alum White", description: "100% water-soluble brilliant white lump ammonia alum.", features: ["98.9% Purity", "100% Water Soluble", "Pure White Color", "Purifying & Dyeing"], price: "₹44/Kg", image: ammoniaWhiteImg },
-      { name: "Ammonia Alum Raw Powder", description: "Crushed white raw powder for heavy industrial water treatment.", features: ["90% Purity", "Powder Form", "CAS: 7784-25-0", "Packet Packaging"], price: "₹27/Kg", image: ammoniaRawPowderImg },
-      { name: "Ammonia Alum Powder", description: "Bio-Tech grade 99.90% pure white powder for water treatment.", features: ["99.90% Purity", "Bio-Tech Grade", "(NH4)Al(SO4)2", "Molecular Wt: 237.15"], price: "₹32/Kg", image: ammoniaPowderImg },
-      { name: "Ammonia Alum Pure Powder", description: "Fine pure powder for pharmaceutical, food, and cosmetic applications.", features: ["99.5% Purity", "Pure Grade", "Cosmetics & Dyeing", "Fast Dissolving"], price: "₹35/Kg", image: ammoniaPurePowderImg }
+      { name: "Ammonia Alum Crystal", description: "Solid crystal form, 98% purity, 11% Al2O3 content for drinking water treatment.", features: ["> 99% Purity", "Grade:Tech/Pure/AR", "Packaging:25/50 kg HDPE/PP Bags", "Made in India", "Chemical Formula:AlNH4(SO4)2.12H2O", "CAS:7784-26-1", "Practical Size:Crystal/Lumps/Powder", "Use:Watertreatment/Paper/Phrama/Textile/Food/Cosmetic"], image: ammoniaCrystalImg },
+      { name: "Ammonia Alum Lumps", description: "Coarse crystalline lumps, 99% purity for industrial water treatment.", features: ["99% Purity", "Industrial Grade", "25-50 kg HDPE Bag", "Made in India"], image: ammoniaLumpsImg },
+      { name: "Ammonia Alum Small Crystal", description: "Fine white small crystals for easy dispersion and consistent dosing.", features: ["99% Purity", "Technical Grade", "AlNH4(SO4)2·12H2O", "White Color"], image: ammoniaSmallCrystalImg },
+      { name: "Ammonia Alum Big Crystal", description: "Oversized transparent solid crystal with 99.9% purity.", features: ["99.9% Purity", "Technical Grade", "CAS: 7784-26-1", "Solid Crystal"], image: ammoniaBigCrystalImg },
+      { name: "Ammonia Alum Delux", description: "Premium delux crystal grade for specialized water purification.", features: ["99.9% Purity", "Delux Grade", "Minimal Impurities", "High Transparency"], image: ammoniaDeluxImg },
+      { name: "Ammonia Alum Super", description: "Engineered super industrial grade with optimal pH stabilization.", features: ["98.9% Purity", "Super Grade", "11% Al2O3", "Purifying & Dyeing"], image: ammoniaSuperImg },
+      { name: "Ammonia Alum White", description: "100% water-soluble brilliant white lump ammonia alum.", features: ["98.9% Purity", "100% Water Soluble", "Pure White Color", "Purifying & Dyeing"], image: ammoniaWhiteImg },
+      { name: "Ammonia Alum Raw Powder", description: "Crushed white raw powder for heavy industrial water treatment.", features: ["90% Purity", "Powder Form", "CAS: 7784-25-0", "Packet Packaging"], image: ammoniaRawPowderImg },
+      { name: "Ammonia Alum Powder", description: "Bio-Tech grade 99.90% pure white powder for water treatment.", features: ["99.90% Purity", "Bio-Tech Grade", "(NH4)Al(SO4)2", "Molecular Wt: 237.15"], image: ammoniaPowderImg },
+      { name: "Ammonia Alum Pure Powder", description: "Fine pure powder for pharmaceutical, food, and cosmetic applications.", features: ["99.5% Purity", "Pure Grade", "Cosmetics & Dyeing", "Fast Dissolving"], image: ammoniaPurePowderImg }
     ]
   },
   "non-ferric-alum": {
@@ -70,13 +84,13 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     description: "Iron-free aluminium sulphate options in slab, lumps, powder, kibble, fine powder, granular, and sulphate powder forms.",
     image: nonFerricSlabImg,
     items: [
-      { name: "Non-Ferric Alum Slab", description: "Solid iron-free alum slab by Ambica for drinking water clarification.", features: ["98.9% Purity", "Ambica Brand", "KAl(SO4)2·12H2O", "HDPE Bag Packaging"], price: "₹26/Kg", image: nonFerricSlabImg },
-      { name: "Non-Ferric Alum Lumps", description: "High potency 0-25 mm lumps with 16-17% Al2O3 for paper & water treatment.", features: ["97.9% Purity", "16-17% Al2O3", "0-25 mm Lump Size", "pH 2.5-3"], price: "₹27/Kg", image: nonFerricLumpsImg },
-      { name: "Non-Ferric Alum Powder", description: "Bio-Tech grade iron-free alum powder with 16-17% Al2O3 for chemical reagents.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "50 kg HDPE Bag"], price: "₹27/Kg", image: nonFerricPowderImg },
-      { name: "Non-Ferric Alum Kibble", description: "Coarse kibble iron-free alum for chemical reagents and industrial processing.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], price: "₹27/Kg", image: nonFerricKibbleImg },
-      { name: "Non-Ferric Alum Fine Powder", description: "99.90% pure non-ferric fine powder for precision synthesis.", features: ["99.90% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], price: "₹27/Kg", image: nonFerricFinePowderImg },
-      { name: "Non-Ferric Alum Granular", description: "Uniform granular non-ferric alum with 17% Al2O3 content for water treatment.", features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], price: "₹27/Kg", image: nonFerricGranularImg },
-      { name: "Aluminium Sulphate Powder", description: "Off-white technical grade aluminium sulphate powder with 17% Al2O3 content.", features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], price: "₹27/Kg", image: alumSulphatePowderImg }
+      { name: "Non-Ferric Alum Slab", description: "Solid iron-free alum slab by Ambica for drinking water clarification.", features: ["98.9% Purity", "Ambica Brand", "KAl(SO4)2·12H2O", "HDPE Bag Packaging"], image: nonFerricSlabImg },
+      { name: "Non-Ferric Alum Lumps", description: "High potency 0-25 mm lumps with 16-17% Al2O3 for paper & water treatment.", features: ["97.9% Purity", "16-17% Al2O3", "0-25 mm Lump Size", "pH 2.5-3"], image: nonFerricLumpsImg },
+      { name: "Non-Ferric Alum Powder", description: "Bio-Tech grade iron-free alum powder with 16-17% Al2O3 for chemical reagents.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "50 kg HDPE Bag"], image: nonFerricPowderImg },
+      { name: "Non-Ferric Alum Kibble", description: "Coarse kibble iron-free alum for chemical reagents and industrial processing.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], image: nonFerricKibbleImg },
+      { name: "Non-Ferric Alum Fine Powder", description: "99.90% pure non-ferric fine powder for precision synthesis.", features: ["99.90% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], image: nonFerricFinePowderImg },
+      { name: "Non-Ferric Alum Granular", description: "Uniform granular non-ferric alum with 17% Al2O3 content for water treatment.", features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], image: nonFerricGranularImg },
+      { name: "Aluminium Sulphate Powder", description: "Off-white technical grade aluminium sulphate powder with 17% Al2O3 content.", features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], image: alumSulphatePowderImg }
     ]
   },
   "ferric-alum": {
@@ -84,7 +98,7 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     description: "Analytical grade Grade 4 ferric alum for commercial wastewater coagulation and industrial treatment.",
     image: ferricGrade4Img,
     items: [
-      { name: "Ferric Alum Grade 4", description: "Analytical Grade alumina material block for commercial & industrial processing.", features: ["98% Purity", "Analytical Grade", "9\" x 4\" x 3\" Size", "Density: 2.5 g/cm3", "HS Code: 69022020"], price: "₹25/Kg", image: ferricGrade4Img }
+      { name: "Ferric Alum Grade 4", description: "Analytical Grade alumina material block for commercial & industrial processing.", features: ["98% Purity", "Analytical Grade", "9\" x 4\" x 3\" Size", "Density: 2.5 g/cm3", "HS Code: 69022020"], image: ferricGrade4Img }
     ]
   },
   "liquid-alum": {
@@ -92,7 +106,7 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     description: "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
     image: liquidAlumImg,
     items: [
-      { name: "Liquid Alum", description: "Concentrated aqueous liquid alum solution with 8% Al2O3 content.", features: ["99% Liquid Purity", "8% Al2O3 Content", "Technical Grade", "Paper Sizing & Water Treatment"], price: "₹27/Kg", image: liquidAlumImg }
+      { name: "Liquid Alum", description: "Concentrated aqueous liquid alum solution with 8% Al2O3 content.", features: ["99% Liquid Purity", "8% Al2O3 Content", "Technical Grade", "Paper Sizing & Water Treatment"], image: liquidAlumImg }
     ]
   }
 };
@@ -109,6 +123,209 @@ export function ProductSubcategoriesPage() {
     : "Explore alum and aluminium sulphate products from Ambica Industries.";
 
   const [dbProducts, setDbProducts] = useState<any[]>([]);
+  const [inquiryProduct, setInquiryProduct] = useState("");
+  const [inquiryOpen, setInquiryOpen] = useState(false);
+  const [inquirySubmitting, setInquirySubmitting] = useState(false);
+  const [inquirySuccess, setInquirySuccess] = useState(false);
+  const [inquiryError, setInquiryError] = useState("");
+  const [inquiryForm, setInquiryForm] = useState({ name: "", email: "", phone: "", company: "", country: "", city: "", message: "" });
+
+  const openInquiry = (productName: string) => {
+    setInquiryProduct(productName);
+    setInquirySuccess(false);
+    setInquiryError("");
+    setInquiryForm({ name: "", email: "", phone: "", company: "", country: "", city: "", message: `Please share pricing and delivery details for ${productName}.` });
+    setInquiryOpen(true);
+  };
+
+  // Keep popup submission behavior aligned with the Contact page:
+  // save to the quotes API, notify the owner through Web3Forms and FormSubmit,
+  // and send the customer acknowledgement through EmailJS when an email is supplied.
+  const submitInquiry = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setInquiryError("");
+
+    if (!inquiryForm.name.trim()) {
+      setInquiryError("Full Name is compulsory.");
+      return;
+    }
+    if (inquiryForm.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiryForm.email.trim())) {
+      setInquiryError("Please enter a valid email address.");
+      return;
+    }
+    if (!inquiryForm.phone.trim()) {
+      setInquiryError("Mobile Number is compulsory.");
+      return;
+    }
+    if (!/^[0-9+\s-]{10,15}$/.test(inquiryForm.phone.trim()) || inquiryForm.phone.replace(/\D/g, "").length !== 10) {
+      setInquiryError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+    if (!inquiryForm.country.trim()) {
+      setInquiryError("Country is compulsory.");
+      return;
+    }
+    if (!inquiryForm.city.trim()) {
+      setInquiryError("City Location is compulsory.");
+      return;
+    }
+
+    setInquirySubmitting(true);
+    try {
+      const contactData = {
+        name: inquiryForm.name.trim(),
+        email: inquiryForm.email.trim(),
+        phone: inquiryForm.phone.trim(),
+        company: inquiryForm.company.trim() || "N/A",
+        country: inquiryForm.country.trim(),
+        city: inquiryForm.city.trim(),
+        product: inquiryProduct,
+        message: inquiryForm.message.trim(),
+      };
+
+      // STEP 1: Save the inquiry in the backend / MongoDB (same as Contact page).
+      try {
+        const dbResponse = await fetch(`${API_BASE}/api/quotes`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: contactData.name,
+            email: contactData.email,
+            phone: contactData.phone,
+            company: contactData.company,
+            country: contactData.country,
+            product: contactData.product,
+            quantity: "1 Unit / Sample",
+            location: contactData.city,
+            message: contactData.message,
+          }),
+        });
+        if (!dbResponse.ok) {
+          const dbResult = await dbResponse.json().catch(() => ({}));
+          console.warn("Backend quote save warning:", dbResult.message || dbResponse.statusText);
+        }
+      } catch (dbError) {
+        console.warn("Backend database save warning:", dbError);
+      }
+
+      // STEP 2: Notify the owner through Web3Forms (same credentials as Contact page).
+      // try {
+      //   const web3Response = await fetch("https://api.web3forms.com/submit", {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify({
+      //       access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "5f7ace63-0f09-4042-9342-466b560328de",
+      //       subject: `New Inquiry for ${contactData.product} from ${contactData.name} - Ambica Alum Industries`,
+      //       from_name: "Ambica Alum Industries",
+      //       replyto: contactData.email,
+      //       name: contactData.name,
+      //       email: contactData.email || "Not provided",
+      //       phone: contactData.phone,
+      //       company: contactData.company,
+      //       country: contactData.country,
+      //       location: contactData.city,
+      //       product: contactData.product,
+      //       message: contactData.message || "Not provided",
+      //     }),
+      //   });
+      //   const web3Result = await web3Response.json().catch(() => ({}));
+      //   if (!web3Response.ok || web3Result.success === false) {
+      //     console.warn("Web3Forms dispatch warning:", web3Result.message || web3Response.statusText);
+      //   }
+      // } catch (web3Error) {
+      //   console.warn("Web3Forms dispatch warning:", web3Error);
+      // }
+
+
+      // STEP 2: Send one New Inquiry email to the owner.
+
+      // STEP 2: Send ONE owner notification using Web3Forms
+      const web3AccessKey =
+        import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
+        "5f7ace63-0f09-4042-9342-466b560328de";
+
+      const web3Response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: web3AccessKey,
+
+            subject: `New Inquiry for ${contactData.product} from ${contactData.name} - Ambica Industries`,
+
+            from_name: "Ambica Industries",
+            replyto: contactData.email || undefined,
+
+            name: contactData.name,
+            email: contactData.email || "Not provided",
+            phone: contactData.phone,
+            company: contactData.company,
+            country: contactData.country,
+            location: contactData.city,
+            product: contactData.product,
+            message: contactData.message || "Not provided",
+          }),
+        }
+      );
+
+      const web3Result = await web3Response.json();
+
+      if (!web3Response.ok || web3Result.success !== true) {
+        throw new Error(
+          web3Result.message || "Failed to send the inquiry notification."
+        );
+      }
+
+
+
+      // STEP 3: Customer acknowledgement through EmailJS, only when email is provided.
+      if (contactData.email) {
+        try {
+          await emailjs.send(
+            "service_fzzkrac",
+            "template_lzonwwf",
+            {
+              to_email: contactData.email,
+              to_name: contactData.name,
+              name: contactData.name,
+              email: contactData.email,
+              phone: contactData.phone,
+              company: contactData.company,
+              country: contactData.country,
+              location: contactData.city,
+              service: contactData.product,
+              product: contactData.product,
+              message: contactData.message || "Not provided",
+              from_name: "Ambica Alum Industries",
+              from_email: "ambicaalumindustries@gmail.com",
+              reply_to: "ambicaalumindustries@gmail.com",
+              urgent_phone: "+91 9824066981",
+              urgent_email: "ambicaalumindustries@gmail.com",
+              support_email: "ambicaalumindustries@gmail.com",
+              company_name: "Ambica Industries",
+              company_address: "Sarkhej-Okaf, Ahmedabad, Gujarat, India",
+              regards: "Best Regards,\nAmbica Industries\n275, Nr. Cow Statue Char Rasta,\nS.P Ring Road Kamod-382427, Ahmedabad Gujarat India",
+            },
+            "CQEPXg0wp-3z7n9o2"
+          );
+        } catch (emailError) {
+          console.warn("EmailJS auto-acknowledgement warning:", emailError);
+        }
+      }
+
+      // As on the Contact page, show the success state after dispatch attempts.
+      setInquirySuccess(true);
+    } catch (error) {
+      console.error("Inquiry submit error:", error);
+      setInquiryError("Something went wrong while submitting your inquiry. Please try again.");
+    } finally {
+      setInquirySubmitting(false);
+    }
+  };
 
   useEffect(() => {
     fetch(`${API_BASE}/api/products?limit=100`)
@@ -185,7 +402,7 @@ export function ProductSubcategoriesPage() {
           `Application: ${matched.application || 'Water Treatment'}`,
           `Form: ${matched.form || 'Standard'}`
         ] : item.features,
-        price: matched ? `₹${matched.price}/${matched.priceUnit}` : item.price,
+        // price: matched ? `₹${matched.price}/${matched.priceUnit}` : item.price,
         image: uploadedImg || item.image,
         isNew: false
       };
@@ -199,7 +416,7 @@ export function ProductSubcategoriesPage() {
         `Application: ${p.application || 'Industrial Treatment'}`,
         `Form: ${p.form || 'Standard'}`
       ],
-      price: `₹${p.price}/${p.priceUnit || 'kg'}`,
+      // price: `₹${p.price}/${p.priceUnit || 'kg'}`,
       image: p.images?.[0] || p.image || group.image,
       isNew: true
     }))
@@ -262,22 +479,85 @@ export function ProductSubcategoriesPage() {
                 </div>
 
                 <div className="p-4 md:p-5 pt-0 space-y-2">
-                  <div className="text-base font-bold text-[#1F4E79] flex items-center gap-1">
+                  {/* <div className="text-base font-bold text-[#1F4E79] flex items-center gap-1">
                     Price: <span className="text-[#1FB6A6]">{item.price}</span>
-                  </div>
-                  <Link
-                    to={`/contact?product=${encodeURIComponent(`${group.title} - ${item.name}`)}`}
+                  </div> */}
+                  <button
+                    type="button"
+                    onClick={() => openInquiry(`${group.title} - ${item.name}`)}
                     className="w-full py-2.5 px-3 bg-[#1F4E79] text-white rounded-lg hover:bg-[#00B4D8] transition-colors font-semibold flex items-center justify-center gap-1.5 text-center text-xs"
                   >
                     <Mail className="w-3.5 h-3.5" />
                     Inquire
-                  </Link>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {inquiryOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 px-4 py-6"
+          onMouseDown={(event) => { if (event.target === event.currentTarget) setInquiryOpen(false); }}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="inquiry-modal-title"
+        >
+          <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white shadow-2xl">
+            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 rounded-t-2xl bg-gradient-to-r from-[#1F4E79] to-[#2FA4A9] px-6 py-5 text-white">
+              <div>
+                <h2 id="inquiry-modal-title" className="text-xl font-bold">Product Inquiry</h2>
+                <p className="mt-1 text-sm text-white/90">{inquiryProduct}</p>
+              </div>
+              <button type="button" onClick={() => setInquiryOpen(false)} aria-label="Close inquiry" className="rounded-full p-2 hover:bg-white/20">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {inquirySuccess ? (
+              <div className="px-6 py-10 text-center">
+                <CheckCircle2 className="mx-auto mb-4 h-14 w-14 text-green-500" />
+                <h3 className="mb-2 text-xl font-bold text-[#1B2A41]">Inquiry Submitted!</h3>
+                <p className="mb-6 text-sm text-gray-600">Thank you. Our team has received your inquiry for {inquiryProduct}.</p>
+                <button type="button" onClick={() => setInquiryOpen(false)} className="rounded-lg bg-[#1F4E79] px-6 py-2.5 font-semibold text-white hover:bg-[#00B4D8]">Close</button>
+              </div>
+            ) : (
+              <form onSubmit={submitInquiry} className="space-y-4 p-6">
+                <p className="text-sm text-gray-600">Please complete the same contact fields shown on our Contact page. Fields marked * are required.</p>
+                {inquiryError && <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{inquiryError}</div>}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <label className="block text-sm font-medium text-[#1B2A41]">Full Name *
+                    <input required value={inquiryForm.name} onChange={e => setInquiryForm(f => ({ ...f, name: e.target.value }))} className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Enter full name" />
+                  </label>
+                  <label className="block text-sm font-medium text-[#1B2A41]">Email Address
+                    <input type="email" value={inquiryForm.email} onChange={e => setInquiryForm(f => ({ ...f, email: e.target.value }))} className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Enter email address" />
+                  </label>
+                  <label className="block text-sm font-medium text-[#1B2A41]">Mobile Number *
+                    <input required type="tel" value={inquiryForm.phone} onChange={e => setInquiryForm(f => ({ ...f, phone: e.target.value }))} className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Enter mobile number" />
+                  </label>
+                  <label className="block text-sm font-medium text-[#1B2A41]">Company Name
+                    <input value={inquiryForm.company} onChange={e => setInquiryForm(f => ({ ...f, company: e.target.value }))} className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Enter company name (optional)" />
+                  </label>
+                  <label className="block text-sm font-medium text-[#1B2A41]">Country *
+                    <input required value={inquiryForm.country} onChange={e => setInquiryForm(f => ({ ...f, country: e.target.value }))} className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Enter country" />
+                  </label>
+                  <label className="block text-sm font-medium text-[#1B2A41]">City Location *
+                    <input required value={inquiryForm.city} onChange={e => setInquiryForm(f => ({ ...f, city: e.target.value }))} className="mt-1.5 w-full rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Enter city location" />
+                  </label>
+                </div>
+                <label className="block text-sm font-medium text-[#1B2A41]">Inquiry Details
+                  <textarea rows={4} value={inquiryForm.message} onChange={e => setInquiryForm(f => ({ ...f, message: e.target.value }))} className="mt-1.5 w-full resize-y rounded-lg border border-gray-300 px-3 py-2.5 font-normal outline-none focus:border-[#1F4E79] focus:ring-2 focus:ring-[#1F4E79]/15" placeholder="Tell us about your inquiry" />
+                </label>
+                <button type="submit" disabled={inquirySubmitting} className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#1F4E79] px-5 py-3 font-semibold text-white transition-colors hover:bg-[#00B4D8] disabled:cursor-not-allowed disabled:opacity-70">
+                  {inquirySubmitting ? <><Loader2 className="h-4 w-4 animate-spin" />Submitting...</> : <><Send className="h-4 w-4" />Submit Inquiry</>}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
