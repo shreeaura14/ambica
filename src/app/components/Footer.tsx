@@ -47,15 +47,15 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-1 text-[#00B4D8]" />
-                <span className="text-gray-300 text-sm">275, Nr. Cow Statue Char Rasta,<br /> Sardar Patel Ring Road <br />Sarkhej-Okaf, Kamod-382427<br />Ahmedabad Gujarat India</span>
+                <span className="text-gray-300 text-sm">275, Nr. Cow Statue Char Rasta,<br /> S.P Ring Road Kamod-382427<br />Ahmedabad Gujarat India</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#00B4D8]" />
-                <span className="text-gray-300 text-sm">+91 9824066981</span>
+                <span className="text-gray-300 text-sm">+91 7016553191</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#00B4D8]" />
-                <span className="text-gray-300 text-sm">ambicaalumindustries@gmail.com</span>
+                <span className="text-gray-300 text-sm">ambicaindalum@gmail.com</span>
               </div>
             </div>
           </div>
