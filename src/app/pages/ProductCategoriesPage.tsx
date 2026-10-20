@@ -34,34 +34,11 @@ export function ProductCategoriesPage() {
       image: ferricGrade4Img,
       popular: true
     },
-    // {
-    //   name: "Liquid Alum",
-    //   slug: "liquid-alum",
-    //   description: "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
-    //   features: ["8% Al2O3 Content", "99% Purity Liquid", "Technical Grade", "25kg Carboys & Drums"],
-    //   image: liquidAlumImg,
-    //   popular: true
-    // } 
-
-     {
+    {
       name: "Liquid Alum",
       slug: "liquid-alum",
-      description:
-        "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
-      features: [
-        "Al2(SO4)3.24H2O",
-        "Purity 48-50%",
-        "Al2O3 8.50%",
-        "+",
-        "0.5%",
-        "Specific Gravity: 1.300 to 1.320",
-        "Clear Solution",
-        "Tanker Loaded: Carbo Pulling 25 kg/40 kg to 60 kg",
-        "Technical Grade",
-        "Made In India",
-        "Application: Paper sizing and Water treatment",
-        "HSN: 28332210"
-      ],
+      description: "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
+      features: ["8% Al2O3 Content", "99% Purity Liquid", "Technical Grade", "25kg Carboys & Drums"],
       image: liquidAlumImg,
       popular: true
     }
