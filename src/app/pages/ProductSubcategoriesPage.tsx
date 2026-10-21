@@ -482,14 +482,15 @@ export function ProductSubcategoriesPage() {
             {allItemsToRender.map((item, index) => (
               <div key={index} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all border border-slate-100 overflow-hidden flex flex-col justify-between group">
                 <div>
-                  <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-
+                 
+                  <div className="relative aspect-[16/10] bg-white flex items-center justify-center p-3">
                     <ImageWithFallback
                       src={item.image}
                       alt={item.name}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-contain object-center"
                     />
                   </div>
+
                   <div className="p-4 md:p-5">
                     <h3 className="text-base md:text-lg font-bold text-[#1B2A41] mb-1.5">{item.name}</h3>
                     <p className="text-[#6B7280] text-xs mb-3 leading-relaxed">{item.description}</p>
