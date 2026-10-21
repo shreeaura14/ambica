@@ -84,7 +84,22 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     description: "Iron-free aluminium sulphate options in slab, lumps, powder, kibble, fine powder, granular, and sulphate powder forms.",
     image: nonFerricSlabImg,
     items: [
-      { name: "Non-Ferric Alum Slab", description: "Solid iron-free alum slab for drinking water clarification.", features: ["98.9% Purity", "Ambica Brand", "KAl(SO4)2·12H2O", "HDPE Bag Packaging"], image: nonFerricSlabImg },
+      {
+        name: "Non-Ferric Alum Slab",
+        description: "Solid iron-free alum for drinking water clarification.",
+        features: [
+          "Al2(SO4)3.14H2O",
+          "Purity: > 99%",
+          "Al2O3 17% ± 0.5%",
+          "Size: 25 to 100 MM",
+          "Colour: White",
+          "Packing: 25/50 kg Bags",
+          "Technical Grade",
+          "Made In India",
+          "HSN Code: 28332210",
+        ],
+        image: nonFerricSlabImg,
+      },
       { name: "Non-Ferric Alum Lumps", description: "High potency 0-25 mm lumps with 16-17% Al2O3 for paper & water treatment.", features: ["97.9% Purity", "16-17% Al2O3", "0-25 mm Lump Size", "pH 2.5-3"], image: nonFerricLumpsImg },
       { name: "Non-Ferric Alum Powder", description: "Bio-Tech grade iron-free alum powder with 16-17% Al2O3 for chemical reagents.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "50 kg HDPE Bag"], image: nonFerricPowderImg },
       { name: "Non-Ferric Alum Kibble", description: "Coarse kibble iron-free alum for chemical reagents and industrial processing.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], image: nonFerricKibbleImg },
