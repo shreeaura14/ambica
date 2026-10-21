@@ -101,14 +101,16 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
       { name: "Ferric Alum Grade 4", description: "Analytical Grade alumina material block for commercial & industrial processing.", features: ["98% Purity", "Analytical Grade", "9\" x 4\" x 3\" Size", "Density: 2.5 g/cm3", "HS Code: 69022020"], image: ferricGrade4Img }
     ]
   },
-  "liquid-alum": {
-    title: "Liquid Alum",
-    description: "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
-    image: liquidAlumImg,
-    items: [
-      { name: "Liquid Alum", description: "Concentrated aqueous liquid alum solution with 8% Al2O3 content.", features: ["99% Liquid Purity", "8% Al2O3 Content", "Technical Grade", "Paper Sizing & Water Treatment"], image: liquidAlumImg }
-    ]
-  }
+  // "liquid-alum": {
+  //   title: "Liquid Alum",
+  //   description: "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
+  //   image: liquidAlumImg,
+  //   items: [
+  //     { name: "Liquid Alum", description: "Concentrated aqueous liquid alum solution with 8% Al2O3 content.", features: ["99% Liquid Purity", "8% Al2O3 Content", "Technical Grade", "Paper Sizing & Water Treatment"], image: liquidAlumImg }
+  //   ]
+  // } 
+
+  
 };
 
 export function ProductSubcategoriesPage() {
