@@ -162,7 +162,8 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
           "Made In India",
           "HSN Code: 28332210",
        ], image: nonFerricGranularImg },
-      { name: "Aluminium Sulphate Powder", description: "Off-white technical grade aluminium sulphate powder with 17% Al2O3 content.", features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], image: alumSulphatePowderImg }
+      { name: "Aluminium Sulphate Powder", description: "Off-white technical grade aluminium sulphate powder with 17% Al2O3 content.", 
+       features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], image: alumSulphatePowderImg }
     ]
   },
   "ferric-alum": {
