@@ -100,8 +100,24 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
         ],
         image: nonFerricSlabImg,
       },
-      { name: "Non-Ferric Alum Lumps", description: "High potency 0-25 mm lumps with 16-17% Al2O3 for paper & water treatment.", features: ["97.9% Purity", "16-17% Al2O3", "0-25 mm Lump Size", "pH 2.5-3"], image: nonFerricLumpsImg },
-      { name: "Non-Ferric Alum Powder", description: "Bio-Tech grade iron-free alum powder with 16-17% Al2O3 for chemical reagents.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "50 kg HDPE Bag"], image: nonFerricPowderImg },
+      { name: "Non-Ferric Alum Lumps", description: "High potency for paper & water treatment.", 
+       features: [
+          "Al2(SO4)3.14H2O",
+          "Purity: > 99%",
+          "Al2O3 17% ± 0.5%",
+          "Size: 0 to 25 MM",
+          "Colour: White",
+          "Packing: 25/50 kg Bags",
+          "Technical Grade",
+          "Made In India",
+          "HSN Code: 28332210",
+       ]
+       , 
+       image: nonFerricLumpsImg },
+      { name: "Non-Ferric Alum Powder", description: "Tech grade iron-free alum powder for chemical reagents.", 
+       features: [
+         "99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "50 kg HDPE Bag"
+       ], image: nonFerricPowderImg },
       { name: "Non-Ferric Alum Kibble", description: "Coarse kibble iron-free alum for chemical reagents and industrial processing.", features: ["99% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], image: nonFerricKibbleImg },
       { name: "Non-Ferric Alum Fine Powder", description: "99.90% pure non-ferric fine powder for precision synthesis.", features: ["99.90% Purity", "Bio-Tech Grade", "16-17% Al2O3", "Ambica Brand"], image: nonFerricFinePowderImg },
       { name: "Non-Ferric Alum Granular", description: "Uniform granular non-ferric alum with 17% Al2O3 content for water treatment.", features: ["98% Purity", "17% Al2O3 Content", "Technical Grade", "Off White Color"], image: nonFerricGranularImg },
