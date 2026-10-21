@@ -110,7 +110,32 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
   //   ]
   // } 
 
-  
+  "liquid-alum": {
+  title: "Liquid Alum",
+  description:
+    "Concentrated technical grade liquid alum for paper sizing, dye fixing, tanning, and water treatment.",
+  image: liquidAlumImg,
+  items: [
+    {
+      name: "Liquid Alum",
+      description:
+        "Concentrated aqueous liquid alum solution with 8.50% ± 0.5% Al2O3 content.",
+      features: [
+        "Al2(SO4)3.24H2O",
+        "48 to 50 % Purity",
+        "Al2O3 8.50 % ± 0.5 %",
+        "Specific Gravity : 1.300 to 1.320",
+        "Clearly Solution",
+        "Tanker Loaded : Cargo Pulling 25 kg/40 kg/60 kg",
+        "Technical Grade",
+        "Made In India",
+        "Application : Paper Sizing & Water Treatment",
+        "HSN Code: 28332210",
+      ],
+      image: liquidAlumImg,
+    },
+  ],
+},
 };
 
 export function ProductSubcategoriesPage() {
