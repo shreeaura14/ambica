@@ -67,7 +67,10 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     // ] 
 
     items: [
-      { name: "Ammonia Alum Crystal", description: "Solid crystal form, 98% purity, 11% Al2O3 content for drinking water treatment.", features: ["> 99% Purity", "Grade:Tech/Pure/AR", "Packaging:25/50 kg HDPE/PP Bags", "Made in India", "Chemical Formula:AlNH4(SO4)2.12H2O", "CAS:7784-26-1", "Practical Size:Crystal/Lumps/Powder", "Use:Watertreatment/Paper/Phrama/Textile/Food/Cosmetic"], image: ammoniaCrystalImg },
+      { name: "Ammonia Alum Crystal", description: "Solid crystal form, 98% purity, 11% Al2O3 content for drinking water treatment.", 
+       features: [
+         "> 99% Purity", "Grade:Tech/Pure/AR", "Packaging:25/50 kg HDPE/PP Bags", "Made in India", "Chemical Formula:AlNH4(SO4)2.12H2O", "CAS:7784-26-1", "Practical Size:Crystal/Lumps/Powder", "Use:Watertreatment/Paper/Phrama/Textile/Food/Cosmetic"
+       ], image: ammoniaCrystalImg },
       { name: "Ammonia Alum Lumps", description: "Coarse crystalline lumps, 99% purity for industrial water treatment.", features: ["99% Purity", "Industrial Grade", "25-50 kg HDPE Bag", "Made in India"], image: ammoniaLumpsImg },
       { name: "Ammonia Alum Small Crystal", description: "Fine white small crystals for easy dispersion and consistent dosing.", features: ["99% Purity", "Technical Grade", "AlNH4(SO4)2·12H2O", "White Color"], image: ammoniaSmallCrystalImg },
       { name: "Ammonia Alum Big Crystal", description: "Oversized transparent solid crystal with 99.9% purity.", features: ["99.9% Purity", "Technical Grade", "CAS: 7784-26-1", "Solid Crystal"], image: ammoniaBigCrystalImg },
