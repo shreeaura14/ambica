@@ -69,7 +69,7 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     items: [
       { name: "Ammonia Alum Crystal", description: "Solid crystal form used for drinking water treatment.", 
        features: [
-         "> 99% Purity", "Technical Grade", "Packing:25/50 kg Bags", "Made in India", "Chemical Formula:AlNH4(SO4)2.12H2O", "CAS:7784-26-1", "Practical Size:Crystal"
+         "> 99% Purity", "Technical Grade", "Packing:25/50 kg Bags", "Made in India", "Chemical Formula:AlNH4(SO4)2.12H2O", "CAS:7784-26-1", "Practical Size:Crystal","HSN Code:28333010"
        ], image: ammoniaCrystalImg },
       { name: "Ammonia Alum Lumps", description: "Coarse crystalline lumps, 99% purity for industrial water treatment.", features: ["99% Purity", "Industrial Grade", "25-50 kg HDPE Bag", "Made in India"], image: ammoniaLumpsImg },
       { name: "Ammonia Alum Small Crystal", description: "Fine white small crystals for easy dispersion and consistent dosing.", features: ["99% Purity", "Technical Grade", "AlNH4(SO4)2·12H2O", "White Color"], image: ammoniaSmallCrystalImg },
