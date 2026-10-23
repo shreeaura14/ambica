@@ -30,10 +30,23 @@ export function HomePage() {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       "name": "Ambica Industries",
+      "alternateName": "Ambica Alum Industries",
       "url": SITE_URL,
       "logo": `${SITE_URL}/favicon.svg`,
       "description": "Manufacturer and supplier of Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate for water treatment and industrial applications.",
+      "areaServed": [
+        { "@type": "Country", "name": "India" }
+      ],
+      "knowsAbout": [
+        "Ammonia Alum",
+        "Non-Ferric Alum",
+        "Ferric Alum",
+        "Liquid Alum",
+        "Aluminium Sulphate",
+        "Water Treatment Chemicals"
+      ],
       "telephone": "+91-70165-53191",
       "email": "ambicaalumindustries@gmail.com",
       "address": {
@@ -79,8 +92,8 @@ export function HomePage() {
   return (
     <div className="min-h-screen">
       <SEO
-        title="Ambica Industries | Alum Manufacturer & Supplier in Ahmedabad"
-        description="Ambica Industries manufactures and supplies Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate for water treatment and industrial applications in Ahmedabad, Gujarat, India."
+        title="Alum Manufacturer in India | Ambica Alum Industries"
+        description="Ambica Industries manufactures and supplies Ammonia Alum, Non-Ferric Alum, Ferric Alum, Liquid Alum and Aluminium Sulphate from Ahmedabad, Gujarat, India. Enquire about bulk supply for water treatment and industrial applications."
         path="/"
         structuredData={structuredData}
       />
