@@ -358,10 +358,13 @@ export function ProductSubcategoriesPage() {
             subject: `New Inquiry for ${contactData.product} from ${contactData.name} - Ambica Industries`,
 
             from_name: "Ambica Industries",
-            replyto: contactData.email || undefined,
 
             name: contactData.name,
-            email: contactData.email || "Not provided",
+            // Only send email/reply-to fields when the customer supplied a real email.
+            // The owner notification must still send when the customer email is blank.
+            ...(contactData.email
+              ? { email: contactData.email, replyto: contactData.email }
+              : {}),
             phone: contactData.phone,
             company: contactData.company,
             country: contactData.country,
