@@ -61,7 +61,7 @@ export function AboutPage() {
             </div> */} 
             
            
-            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50">
+            <div className="rounded-2xl overflow-hidden shadow-xl aspect-[16/10] max-h-[320px] bg-slate-100">
               <ImageWithFallback
                 src={manufacturingImage}
                 alt="Ammonia Alum Crystals"
