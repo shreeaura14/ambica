@@ -60,13 +60,15 @@ export function AboutPage() {
               />
             </div> */} 
             
-            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50 flex items-center justify-center">
+           
+            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50">
               <ImageWithFallback
                 src={manufacturingImage}
                 alt="Ammonia Alum Crystals"
-                className="w-full h-[260px] md:h-[300px] object-contain"
+                className="block w-full h-auto object-contain"
               />
             </div>
+
           </div>
         </div>
       </section>
