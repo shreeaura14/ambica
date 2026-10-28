@@ -67,7 +67,7 @@ export function AboutPage() {
             <ImageWithFallback
               src={manufacturingImage}
               alt="Ammonia Alum Crystals"
-              className="w-full h-[260px] md:h-[300px] object-contain"
+              className="w-full h-[260px] md:h-[1000px] object-contain"
             />
           </div>
 
