@@ -91,9 +91,9 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
           "Al2(SO4)3.14H2O",
           "Purity: > 99%",
           "Al2O3 17% ± 0.5%",
-          "Size: 25 to 100 MM",
+          "Size: 20 x 12 x 5 Inch",
           "Colour: White",
-          "Packing: 25/50 kg Bags",
+          "Packing: Loose",
           "Technical Grade",
           "Made In India",
           "HSN Code: 28332210",
@@ -171,7 +171,7 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     description: "Analytical grade Grade 4 ferric alum for commercial wastewater coagulation and industrial treatment.",
     image: ferricGrade4Img,
     items: [
-      { name: "Ferric Alum", description: "Grade 4 White material Slab for commercial and industrial processing.", features: ["Size:20\" x 12\" x 5\" Inch","Al2O3 16% ± 0.5%","ph:2.7","Technical Grade"], image: ferricGrade4Img }
+      { name: "Ferric Alum", description: "Grade 4 White material Slab for commercial and industrial processing.", features: ["Size:20\" x 12\" x 5\" Inch","Al2O3 16% ± 0.5%","ph:2.7","Technical Grade","Made In India"], image: ferricGrade4Img }
     ]
   },
   // "liquid-alum": {
