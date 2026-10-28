@@ -3,7 +3,7 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { SEO, SITE_URL } from "../components/seo/SEO";
 import heroImage from "@/Assets/Ammonia Alum/Ammonia Alum Lumps.png";
 import liquidAlumImg from "@/Assets/Liquid Alum/Liquid Alum.png";
-import ammoniaAlumProductImg from "@/Assets/Ammonia Alum/Ammonia Alum Delux.png";
+import ammoniaAlumProductImg from "@/Assets/Ammonia Alum/Image1.jpg";
 import nonferricProductImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Lumps.png";
 import ferricProductImg from "@/Assets/Ferric Alum/Ferric Alum Grade4.png";
 
