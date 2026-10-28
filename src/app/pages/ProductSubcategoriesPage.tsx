@@ -171,7 +171,7 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
     description: "Analytical grade Grade 4 ferric alum for commercial wastewater coagulation and industrial treatment.",
     image: ferricGrade4Img,
     items: [
-      { name: "Ferric Alum Grade 4", description: "Analytical Grade alumina material block for commercial & industrial processing.", features: ["98% Purity", "Analytical Grade", "9\" x 4\" x 3\" Size", "Density: 2.5 g/cm3", "HSN Code: 69022020"], image: ferricGrade4Img }
+      { name: "Ferric Alum", description: "Grade 4 White material Slab for commercial and industrial processing.", features: ["Size:20\" x 12\" x 5\" Inch","Al2O3 16% ± 0.5%","ph:2.7","Technical Grade"], image: ferricGrade4Img }
     ]
   },
   // "liquid-alum": {
