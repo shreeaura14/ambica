@@ -62,13 +62,15 @@ export function AboutPage() {
             
            
            
-            <div className="rounded-2xl overflow-hidden shadow-md flex items-center justify-center">
-              <ImageWithFallback
-                src={manufacturingImage}
-                alt="Ammonia Alum Crystals"
-                className="block w-full h-auto object-contain"
-              />
-            </div>
+           
+          <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50 flex items-center justify-center">
+            <ImageWithFallback
+              src={manufacturingImage}
+              alt="Ammonia Alum Crystals"
+              className="w-full h-[260px] md:h-[300px] object-contain"
+            />
+          </div>
+
 
           </div>
         </div>
