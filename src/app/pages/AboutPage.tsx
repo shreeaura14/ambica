@@ -52,11 +52,19 @@ export function AboutPage() {
                 processes ensure that every product meets international standards.
               </p>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100">
+            {/* <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100">
               <ImageWithFallback
                 src={manufacturingImage}
                 alt="Ammonia Alum Small Crystals"
                 className="w-full h-[260px] md:h-[300px] object-cover"
+              />
+            </div> */} 
+            
+            <div className="rounded-2xl overflow-hidden shadow-md border border-gray-100 bg-gray-50 flex items-center justify-center">
+              <ImageWithFallback
+                src={manufacturingImage}
+                alt="Ammonia Alum Crystals"
+                className="w-full h-[260px] md:h-[300px] object-contain"
               />
             </div>
           </div>
