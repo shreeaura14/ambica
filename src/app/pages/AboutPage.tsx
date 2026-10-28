@@ -1,6 +1,6 @@
 import { Award, Target, Eye, Heart, Factory, Shield, Users, TrendingUp } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import manufacturingImage from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
+import manufacturingImage from "@/Assets/Ammonia Alum/Ammonia Alum Crystal_About.png";
 import { SEO } from "../components/seo/SEO";
 import labImage from "@/Assets/Ammonia Alum/Ammonia Alum Crystal.png";
 export function AboutPage() {
