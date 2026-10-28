@@ -145,7 +145,7 @@ export function ContactPage() {
 
           body: JSON.stringify({
             name: formData.name,
-            email: formData.email,
+            email: customerEmail,
             phone: formData.phone,
             company: formData.company || "N/A",
             country: formData.country,
@@ -161,10 +161,17 @@ export function ContactPage() {
 
       // =====================================================
       // STEP 2: WEB3FORMS OWNER NOTIFICATION
+      // This notification runs whether or not the customer enters an email.
+      // Ensure this access key's recipient is configured in Web3Forms to
+      // ambicaindustries@gmail.com.
       // =====================================================
       const web3AccessKey =
         import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
         "5f7ace63-0f09-4042-9342-466b560328de";
+
+      // Customer email is optional. Owner notification must be sent even
+      // when the customer leaves the email field blank.
+      const customerEmail = formData.email.trim();
 
       const web3Response = await fetch(
         "https://api.web3forms.com/submit",
@@ -180,10 +187,10 @@ export function ContactPage() {
             subject: `New Inquiry for ${formData.product} from ${formData.name} - Ambica Industries`,
 
             from_name: "Ambica Industries",
-            replyto: formData.email || undefined,
+            replyto: customerEmail || undefined,
 
             name: formData.name,
-            email: formData.email || "Not provided",
+            email: customerEmail || "Not provided",
             phone: formData.phone,
             company: formData.company,
             country: formData.country,
@@ -287,7 +294,7 @@ export function ContactPage() {
       // EmailJS will only be sent when an email address is
       // provided because EmailJS requires a recipient email.
       // =====================================================
-      if (formData.email.trim()) {
+      if (customerEmail) {
         try {
           await emailjs.send(
             "service_fzzkrac",
@@ -295,13 +302,13 @@ export function ContactPage() {
             "template_lzonwwf",
 
             {
-              to_email: formData.email,
+              to_email: customerEmail,
 
               to_name: formData.name,
 
               name: formData.name,
 
-              email: formData.email,
+              email: customerEmail,
 
               phone: formData.phone,
 
@@ -446,7 +453,7 @@ export function ContactPage() {
                       <span className="font-semibold text-slate-800">
                         Owner Notification:
                       </span>{" "}
-                      Sent to ambicaalumindustries@gmail.com
+                      Sent to ambicaindustries@gmail.com
                     </div>
 
                     {formData.email && (
@@ -1106,7 +1113,7 @@ export function ContactPage() {
                     </div>
 
                     <div className="text-xs text-[#6B7280] leading-relaxed">
-                      ambicaindalum@gmail.com
+                      ambicaindustries@gmail.com
                     </div>
                   </div>
                 </div>
