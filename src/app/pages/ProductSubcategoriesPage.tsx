@@ -155,7 +155,7 @@ const SUBCATEGORIES_DATA: Record<string, SubcategoryGroup> = {
           "Al2(SO4)3.14H2O",
           "Purity: > 99%",
           "Al2O3 17% ± 0.5%",
-          "Size: 20 to 200 Mesh",
+          "Size: 0 to 4 MM",
           "Colour: White",
           "Packing: 25/50 kg Bags",
           "Technical Grade",
