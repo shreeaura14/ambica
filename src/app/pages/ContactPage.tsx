@@ -132,6 +132,9 @@ export function ContactPage() {
 
     setIsSubmitting(true);
 
+    // Customer email is optional; the owner notification must still be sent.
+    const customerEmail = formData.email.trim();
+
     try {
       // =====================================================
       // STEP 1: SAVE INQUIRY TO BACKEND / MONGODB
@@ -169,10 +172,6 @@ export function ContactPage() {
         import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ||
         "5f7ace63-0f09-4042-9342-466b560328de";
 
-      // Customer email is optional. Owner notification must be sent even
-      // when the customer leaves the email field blank.
-      const customerEmail = formData.email.trim();
-
       const web3Response = await fetch(
         "https://api.web3forms.com/submit",
         {
@@ -187,10 +186,10 @@ export function ContactPage() {
             subject: `New Inquiry for ${formData.product} from ${formData.name} - Ambica Industries`,
 
             from_name: "Ambica Industries",
-            replyto: customerEmail || undefined,
-
+            ...(customerEmail ? { replyto: customerEmail, email: customerEmail } : {}),
+            // Do not send the literal text "Not provided" in the email field:
+            // some form services validate this field as an email address.
             name: formData.name,
-            email: customerEmail || "Not provided",
             phone: formData.phone,
             company: formData.company,
             country: formData.country,
