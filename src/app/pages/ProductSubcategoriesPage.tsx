@@ -22,7 +22,7 @@ import ammoniaPurePowderImg from "@/Assets/Ammonia Alum/Ammonia Alum Pure Powder
 import nonFerricSlabImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Slab.png";
 import nonFerricLumpsImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Lumps.png";
 import nonFerricPowderImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Powder.png";
-import nonFerricKibbleImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Kibble.png";
+import nonFerricKibbleImg from "@/Assets/Non-Ferric Alum/Image1.png";
 import nonFerricFinePowderImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Fine Powder.png";
 import nonFerricGranularImg from "@/Assets/Non-Ferric Alum/Non-Ferric Alum Granular.png";
 import alumSulphatePowderImg from "@/Assets/Non-Ferric Alum/Aluminium Sulphate Powder.png";
